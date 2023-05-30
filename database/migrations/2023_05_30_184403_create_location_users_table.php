@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('location_users', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(\App\Models\User::class);
-            $table->integer('coins');
-            $table->string('code');
-            $table->string('description');
-            $table->enum('status', ['pending', 'completed', 'failed']);
+            $table->foreignIdFor(\App\Models\Location::class);
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('location_users');
     }
 };
