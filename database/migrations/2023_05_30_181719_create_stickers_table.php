@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('stickers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('descriotion');
+            $table->string('description');
             $table->string('photo');
             $table->timestamps();
         });

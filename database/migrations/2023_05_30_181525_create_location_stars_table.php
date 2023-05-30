@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('location_stars', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(\App\Models\Location::class);
+            $table->integer('left_offset');
+            $table->integer('top_offset');
+            $table->string('name');
+            $table->text('description');
             $table->timestamps();
         });
     }
