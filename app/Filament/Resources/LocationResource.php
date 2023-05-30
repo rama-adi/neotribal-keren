@@ -29,6 +29,10 @@ class LocationResource extends Resource
                 Forms\Components\Textarea::make('description')
                     ->required()
                     ->maxLength(65535),
+                Forms\Components\FileUpload::make('photo')
+                    ->required()
+                    ->directory('location-photo')
+                    ->image(),
             ]);
     }
 
@@ -53,14 +57,14 @@ class LocationResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -68,5 +72,5 @@ class LocationResource extends Resource
             'create' => Pages\CreateLocation::route('/create'),
             'edit' => Pages\EditLocation::route('/{record}/edit'),
         ];
-    }    
+    }
 }

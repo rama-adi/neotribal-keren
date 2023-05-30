@@ -14,16 +14,22 @@ class LocationFactory extends Factory
     public function definition(): array
     {
 
-        $filepath = storage_path('location-photo');
+        $filepath = storage_path('app/public/location-photo');
 
         if (!File::exists($filepath)) {
             File::makeDirectory($filepath);
         }
 
+        $image = $this->faker->image($filepath, 1080, 1920);
+        $segments = explode('/', $image); // Split the string into an array using the forward slash as the delimiter
+        $index = array_search('location-photo', $segments); // Find the index of the "neotribal" segment
+        $result = implode('/', array_slice($segments, $index + 1)); // Extract everything after the "neotribal" segment
+        $result = 'location-photo/' . $result;
+
         return [
             'name' => $this->faker->city,
             'description' => $this->faker->paragraph,
-            'photo' => $this->faker->image($filepath, 1080, 1920 ),
+            'photo' => $result,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
 
