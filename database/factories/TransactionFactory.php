@@ -15,11 +15,14 @@ class TransactionFactory extends Factory
     public function definition(): array
     {
         $randomNumber = $this->faker->numberBetween(-100, 100);
+        $payAmount = 0;
 
         if ($randomNumber > 0) {
             $description = 'Membeli koin ' . $randomNumber . ' koin';
+            $payAmount = $randomNumber * 1000;
         } else {
             $description = 'Menggunakan Koin ' . abs($randomNumber) . ' koin';
+            $payAmount = 0;
         }
 
         return [
@@ -29,6 +32,7 @@ class TransactionFactory extends Factory
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
             'description' => $description,
+            'amount' => $payAmount,
             'user_id' => User::factory(),
         ];
     }

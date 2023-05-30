@@ -18,6 +18,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::prefix('dashboard')->middleware('auth')->group(function () {
+    Route::get('buy-coin', \App\Http\Livewire\BuyCoin::class)->name('buy-coin');
+    Route::get('experience/{location}', \App\Http\Livewire\Experience::class)->name('experience-location');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -28,4 +33,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

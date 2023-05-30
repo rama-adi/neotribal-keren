@@ -16,4 +16,16 @@ class Sticker extends Model
     {
         return $this->hasMany(StickerUser::class, 'sticker_id');
     }
+
+    public function giveToUser(User $user)
+    {
+        if($this->stickerUsers()->where('user_id', $user->id)->exists()) {
+            return;
+        }
+
+        $this->stickerUsers()->create([
+            'user_id' => $user->id,
+            'sticker_id' => $this->id,
+        ]);
+    }
 }

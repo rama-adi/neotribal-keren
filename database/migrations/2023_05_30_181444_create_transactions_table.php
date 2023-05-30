@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('coins');
             $table->string('code');
             $table->string('description');
+            $table->string('amount');
             $table->enum('status', ['pending', 'completed', 'failed']);
             $table->timestamps();
         });

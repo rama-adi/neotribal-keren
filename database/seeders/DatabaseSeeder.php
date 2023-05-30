@@ -34,10 +34,10 @@ class DatabaseSeeder extends Seeder
         });
 
         Sticker::factory(10)->create()->each(function ($sticker) {
-           StickerUser::factory()->create([
+            StickerUser::factory()->create([
                 'sticker_id' => $sticker->id,
                 'user_id' => $sticker->id
-           ]);
+            ]);
         });
 
         User::all()->each(function ($user) {
@@ -48,10 +48,15 @@ class DatabaseSeeder extends Seeder
         });
 
         User::all()->each(function ($user) {
-            $user->coins = $user->transactions->sum('coin');
-            $user->save();
+            Transaction::whereUserId($user->id)
+                ->whereStatus('completed')
+                ->get()
+                ->each(function ($transaction) use ($user) {
+                    $user->update([
+                        'coins' => $user->coins + $transaction->coins
+                    ]);
+                });
         });
-
 
 
         // \App\Models\User::factory()->create([

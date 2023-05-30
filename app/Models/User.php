@@ -59,4 +59,9 @@ class User extends Authenticatable implements FilamentUser
     {
         return $this->hasMany(StickerUser::class, 'user_id');
     }
+
+    public function locationUsers(): HasMany
+    {
+        return $this->hasMany(LocationUser::class, 'user_id');
+    }
 }

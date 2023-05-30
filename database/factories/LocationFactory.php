@@ -31,6 +31,7 @@ class LocationFactory extends Factory
             'description' => $this->faker->paragraph,
             'photo' => $result,
             'created_at' => Carbon::now(),
+            'coins' => $this->faker->numberBetween(10, 100),
             'updated_at' => Carbon::now(),
 
         ];
