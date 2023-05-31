@@ -14,6 +14,9 @@ class EditLocation extends EditRecord
     {
         return [
             Actions\DeleteAction::make(),
+            Actions\Action::make('builder')
+                ->url(route('builder', $this->record))
+                ->openUrlInNewTab()
         ];
     }
 }
