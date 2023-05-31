@@ -38,13 +38,16 @@ class BuyExperience extends Component
             DB::transaction(function () {
                 auth()->user()->locations()->attach($this->selectedExperience->id);
                 auth()->user()->decrement('coins', $this->selectedExperience->coins);
+
                 Transaction::create([
                     'user_id' => auth()->id(),
+                    'coins' => (-1 * $this->selectedExperience->coins),
                     'code' => auth()->id() . "-AUTOCOMPLETE-EXPROBOT-" . strtoupper(Str::random(10)),
-                    'amount' => $this->selectedExperience->coins,
+                    'amount' => "0 (Bought via coin)",
                     'description' => 'Bought ' . $this->selectedExperience->name . ' experience (NO APPROVAL NEEDED)',
                     'status' => 'completed'
                 ]);
+
             });
 
 
