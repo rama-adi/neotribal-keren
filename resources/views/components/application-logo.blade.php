@@ -1,64 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1800 1800">
     <defs>
-        <style>.cls-1 {
-                fill: none;
-            }
-
-            .cls-2 {
-                fill: #b7312c;
-            }
-
-            .cls-3 {
-                isolation: isolate;
-            }
-
-            .cls-4 {
-                fill: #862420;
-            }
-
-            .cls-5 {
-                fill: #a22b27;
-            }
-
-            .cls-6 {
-                fill: #621a17;
-            }
-
-            .cls-7 {
-                fill: #f3eed9;
-            }
-
-            .cls-8 {
-                fill: #7e221e;
-            }
-
-            .cls-9 {
-                clip-path: url(#clip-path);
-            }
-
-            .cls-10 {
-                fill: #fff;
-            }
-
-            .cls-11 {
-                fill: #661b18;
-            }
-
-            .cls-12 {
-                clip-path: url(#clip-path-2);
-            }
-
-            .cls-13 {
-                fill: #661a19;
-            }
-
-            .cls-14 {
-                fill: #aa2e29;
-            }
-
-            .cls-15 {
-                fill: #aa2e28;
-            }</style>
+        <style>
+            .cls-1{fill:none;}.cls-2{fill:#b7312c;}.cls-3{isolation:isolate;}.cls-4{fill:#862420;}.cls-5{fill:#a22b27;}.cls-6{fill:#621a17;}.cls-7{fill:#f3eed9;}.cls-8{fill:#7e221e;}.cls-9{clip-path:url(#clip-path);}.cls-10{fill:#fff;}.cls-11{fill:#661b18;}.cls-12{clip-path:url(#clip-path-2);}.cls-13{fill:#661a19;}.cls-14{fill:#aa2e29;}.cls-15{fill:#aa2e28;}
+        </style>
         <clipPath id="clip-path">
             <polygon class="cls-1" points="1170.79 914.76 717.54 1305.51 223.82 919.77 677.07 529.02 1170.79 914.76"/>
         </clipPath>
