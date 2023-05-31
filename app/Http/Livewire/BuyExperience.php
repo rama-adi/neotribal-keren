@@ -22,8 +22,6 @@ class BuyExperience extends Component
         $this->unsoldExperiences = Location::whereDoesntHave('users', function ($query) {
             $query->where('user_id', auth()->id());
         })->get();
-
-        $this->selectedExperience = $this->unsoldExperiences[1];
     }
 
     public function selectOne($index)
