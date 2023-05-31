@@ -12,6 +12,7 @@ class TribalXAi extends Component
 
     public $input = "";
     public $currentResponse = "Ready to ask a question?";
+
     public function ask()
     {
         $this->history = [];
@@ -68,6 +69,11 @@ class TribalXAi extends Component
                 ->replace("\n", " ")
         ];
 
+        $this->history[] = [
+            'role' => 'user',
+            'content' => $this->input
+        ];
+
 
         $response = $openAI->chat()->create([
             'model' => 'gpt-3.5-turbo',
@@ -76,6 +82,7 @@ class TribalXAi extends Component
 
 
         $this->currentResponse = $response->choices[0]->message->content;
+        $this->input = '';
     }
 
     public function render()
