@@ -75,7 +75,7 @@ class TribalXAi extends Component
         ]);
 
 
-        $this->currentResponse = $response->choices[0]->message;
+        $this->currentResponse = $response->choices[0]->message->content;
     }
 
     public function render()
