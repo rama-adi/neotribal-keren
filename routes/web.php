@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('buy-experience', \App\Http\Livewire\BuyExperience::class)->name('buy-experience');
@@ -24,7 +24,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('experience/{location}', \App\Http\Livewire\Experience::class)->name('experience-location');
 });
 
-Route::get('/dashboard', function () {
+Route::get('/', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
