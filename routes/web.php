@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 //});
 
 Route::prefix('dashboard')->middleware('auth')->group(function () {
+    Route::get('tribal-x', \App\Http\Livewire\TribalXAi::class)->name('tribal-x');
     Route::get('/builder/{location}', \App\Http\Controllers\PlaceController::class)->name('builder');
     Route::get('buy-experience', \App\Http\Livewire\BuyExperience::class)->name('buy-experience');
     Route::get('buy-coin', \App\Http\Livewire\BuyCoin::class)->name('buy-coin');

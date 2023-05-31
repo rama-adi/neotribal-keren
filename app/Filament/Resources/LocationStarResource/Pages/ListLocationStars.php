@@ -3,7 +3,10 @@
 namespace App\Filament\Resources\LocationStarResource\Pages;
 
 use App\Filament\Resources\LocationStarResource;
+use App\Jobs\IngestToPinecone;
+use App\Models\User;
 use Filament\Pages\Actions;
+use Filament\Pages\Actions\Action;
 use Filament\Resources\Pages\ListRecords;
 
 class ListLocationStars extends ListRecords
@@ -14,6 +17,12 @@ class ListLocationStars extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
+            Action::make('ingest')
+                ->label('Ingest to pinecone')
+                ->action(function () {
+                    IngestToPinecone::dispatch();
+                })
+                ->requiresConfirmation(),
         ];
     }
 }
