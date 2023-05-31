@@ -29,6 +29,10 @@ class LocationResource extends Resource
                 Forms\Components\Textarea::make('description')
                     ->required()
                     ->maxLength(65535),
+                Forms\Components\TextInput::make('coins')
+                    ->label('Coin price')
+                    ->required()
+                    ->numeric(),
                 Forms\Components\FileUpload::make('photo')
                     ->required()
                     ->directory('location-photo')
@@ -42,6 +46,7 @@ class LocationResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('description'),
+                Tables\Columns\TextColumn::make('coins'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')
