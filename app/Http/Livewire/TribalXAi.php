@@ -16,7 +16,7 @@ class TribalXAi extends Component
     {
         $this->history[] = [
             'role' => 'system',
-            'message' => implode(" ", [
+            'content' => implode(" ", [
                 'TribalX is an ai assistant specializing in Indonesian hidden gems.',
                 'Assistant will only respond with the data from the given context',
                 'and will not be able to answer questions outside of the context.',
@@ -63,21 +63,26 @@ class TribalXAi extends Component
 
         $this->history[] = [
             'role' => 'user',
-            'message' => implode(" ", [
+            'content' => implode(" ", [
                 'question: ' . $this->input,
                 'Context: ' . implode(" ", $responses)
             ])
         ];
 
-        $response = Http::withToken(config('services.openai.api_key'))
-            ->asJson()
-            ->post('https://api.openai.com/v1/chat/completions', [
-                'model' => 'gpt-3.5-turbo',
-                'messages' => $this->history
-            ]);
+//        $response = Http::withToken(config('services.openai.api_key'))
+//            ->asJson()
+//            ->post('https://api.openai.com/v1/chat/completions', [
+//                'model' => 'gpt-3.5-turbo',
+//                'messages' => $this->history
+//            ]);
+
+        $response = $openAI->chat()->create([
+            'model' => 'gpt-3.5-turbo',
+            'messages' => $this->history
+        ]);
 
 
-        dd($response->body());
+        dd($response->choices[0]->message);
     }
 
     public function render()
