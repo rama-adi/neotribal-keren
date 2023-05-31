@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Location;
 use App\Models\Transaction;
+use DB;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
@@ -36,7 +37,7 @@ class BuyExperience extends Component
 
         if (auth()->user()->coins >= $this->selectedExperience->coins) {
 
-            \DB::transaction(function () {
+            DB::transaction(function () {
                 auth()->user()->locations()->attach($this->selectedExperience->id);
                 auth()->user()->decrement('coins', $this->selectedExperience->coins);
                 Transaction::create([
