@@ -19,6 +19,7 @@ Route::get('/', function () {
 });
 
 Route::prefix('dashboard')->middleware('auth')->group(function () {
+    Route::get('buy-experience', \App\Http\Livewire\BuyExperience::class)->name('buy-experience');
     Route::get('buy-coin', \App\Http\Livewire\BuyCoin::class)->name('buy-coin');
     Route::get('experience/{location}', \App\Http\Livewire\Experience::class)->name('experience-location');
 });

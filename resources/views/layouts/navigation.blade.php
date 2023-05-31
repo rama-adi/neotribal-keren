@@ -22,6 +22,12 @@
                         {{ __('Buy Coin') }}
                     </x-nav-link>
                 </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('buy-experience')" :active="request()->routeIs('buy-experience')">
+                        {{ __('Buy new experiences') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
@@ -46,6 +52,10 @@
 
                         <x-dropdown-link :href="route('buy-coin')">
                             {{ __('Buy coin') }}
+                        </x-dropdown-link>
+
+                        <x-dropdown-link :href="route('buy-experience')">
+                            {{ __('Buy new experiences') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->

@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -63,5 +64,10 @@ class User extends Authenticatable implements FilamentUser
     public function locationUsers(): HasMany
     {
         return $this->hasMany(LocationUser::class, 'user_id');
+    }
+
+    public function locations(): BelongsToMany
+    {
+        return $this->belongsToMany(Location::class, 'location_users');
     }
 }
