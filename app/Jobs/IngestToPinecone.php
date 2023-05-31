@@ -29,47 +29,19 @@ class IngestToPinecone implements ShouldQueue
      */
     public function handle(): void
     {
-        $pinecone = app(Pinecone::class);
-        $openAI = app(\OpenAI\Client::class);
 
-        Location::all()->each(function (Location $location) use ($openAI, $pinecone) {
-            $embedding = $openAI
-                ->embeddings()
-                ->create([
-                    'model' => 'text-embedding-ada-002',
-                    'input' => $location->description
-                ]);
-
-            $pinecone->index('neotribal')
-                ->vectors()
-                ->upsert(vectors: [
-                    'id' => 'locations_' . $location->id,
-                    'values' => $embedding->embeddings[0]->embedding,
-                    'metadata' => [
-                        'id' => $location->id,
-                        'title' => $location->name
-                    ]
-                ]);
+        Location::all()->each(function (Location $location) {
+            IngestToPineconeChunk::dispatch(
+                $location,
+                'location'
+            );
         });
 
-        LocationStar::all()->each(function (LocationStar $location) use ($openAI, $pinecone) {
-            $embedding = $openAI
-                ->embeddings()
-                ->create([
-                    'model' => 'text-embedding-ada-002',
-                    'input' => $location->description
-                ]);
-
-            $pinecone->index('neotribal')
-                ->vectors()
-                ->upsert(vectors: [
-                    'id' => 'locationstar_' . $location->id,
-                    'values' => $embedding->embeddings[0]->embedding,
-                    'metadata' => [
-                        'id' => $location->id,
-                        'title' => $location->name
-                    ]
-                ]);
+        LocationStar::all()->each(function (LocationStar $location) {
+            IngestToPineconeChunk::dispatch(
+                $location,
+                'locationstar'
+            );
         });
     }
 }
