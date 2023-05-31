@@ -11,24 +11,17 @@ class TribalXAi extends Component
     public $history = [];
 
     public $input = "";
-
-    public function mount()
-    {
-        $this->history[] = [
-            'role' => 'system',
-            'content' => implode(" ", [
-                'TribalX is an ai assistant specializing in Indonesian hidden gems.',
-                'Assistant will only respond with the data from the given context',
-                'and will not be able to answer questions outside of the context.',
-                'the ai is interacting with the user ' . auth()->user()->name,
-            ])
-        ];
-
-
-    }
-
+    public $currentResponse = "Ready to ask a question?";
     public function ask()
     {
+        $this->history = [];
+
+        $this->history[] = [
+            'role' => 'system',
+            'content' => str(view('prompts.tribal-x.starting')->render())
+                ->replace("\n", " ")
+        ];
+
         $openAI = app(Client::class);
         $pinecone = app(\Probots\Pinecone\Client::class);
         $embedding = $openAI
@@ -47,6 +40,7 @@ class TribalXAi extends Component
             );
 
         $responses = [];
+
         foreach ($vectorFetch->json('matches') as $match) {
             [$model, $id] = explode('-', $match['id']);
 
@@ -64,17 +58,16 @@ class TribalXAi extends Component
         $this->history[] = [
             'role' => 'user',
             'content' => implode(" ", [
-                'question: ' . $this->input,
-                'Context: ' . implode(" ", $responses)
+                'Here is the data from NeoTribal: ' . implode(" ", $responses)
             ])
         ];
 
-//        $response = Http::withToken(config('services.openai.api_key'))
-//            ->asJson()
-//            ->post('https://api.openai.com/v1/chat/completions', [
-//                'model' => 'gpt-3.5-turbo',
-//                'messages' => $this->history
-//            ]);
+        $this->history[] = [
+            'role' => 'user',
+            'content' => str(view('prompts.tribal-x.rules')->render())
+                ->replace("\n", " ")
+        ];
+
 
         $response = $openAI->chat()->create([
             'model' => 'gpt-3.5-turbo',
@@ -82,7 +75,7 @@ class TribalXAi extends Component
         ]);
 
 
-        dd($response->choices[0]->message);
+        $this->currentResponse = $response->choices[0]->message;
     }
 
     public function render()
