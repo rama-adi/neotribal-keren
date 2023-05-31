@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 use OpenAI\Client;
 
@@ -68,12 +69,15 @@ class TribalXAi extends Component
             ])
         ];
 
-        $response = $openAI->chat()->create([
-            'model' => 'gpt-3.5-turbo',
-            'messages' => $this->history,
-        ]);
+        $response = Http::withToken(config('services.openai.api_key'))
+            ->asJson()
+            ->post('https://api.openai.com/v1/chat/completions', [
+                'model' => 'gpt-3.5-turbo',
+                'messages' => $this->history
+            ]);
 
-        dd($response);
+
+        dd($response->json('choices')[0]['content']);
     }
 
     public function render()
