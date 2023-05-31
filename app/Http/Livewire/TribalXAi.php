@@ -77,7 +77,7 @@ class TribalXAi extends Component
             ]);
 
 
-        dd($response->json('choices')[0]['content']);
+        dd($response->body());
     }
 
     public function render()
