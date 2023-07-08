@@ -10,12 +10,12 @@
                 </svg>
 
                  </span>
-                <p class="ml-3 font-medium text-white truncate">
-                    <span class="md:hidden"> NeoTribal Closed beta @ UC DEI 2023 </span>
-                    <span class="hidden md:inline">
-                        NeoTribal is a closed beta project for the UC DEI 2023. We are currently in the process of testing our platform and will be launching soon.
-                    </span>
-                </p>
+{{--                <p class="ml-3 font-medium text-white truncate">--}}
+{{--                    <span class="md:hidden"> NeoTribal Closed beta @ UC DEI 2023 </span>--}}
+{{--                    <span class="hidden md:inline">--}}
+{{--                        NeoTribal is a closed beta project for the UC DEI 2023. We are currently in the process of testing our platform and will be launching soon.--}}
+{{--                    </span>--}}
+{{--                </p>--}}
             </div>
         </div>
     </div>
